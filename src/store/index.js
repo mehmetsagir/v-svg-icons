@@ -9,6 +9,7 @@ export default new Vuex.Store({
     githubRepo: "https://github.com/mehmetsagir/v-svg-icons",
     iconList: [],
     version: "",
+    pageLoader: true
   },
   mutations: {
     initIconList(state, iconList){
@@ -22,15 +23,19 @@ export default new Vuex.Store({
     fetchIcons(context){
       Axios.get('https://v-svg-icons-server.herokuapp.com/').then(res => {
         context.commit('initIconList', res.data.reverse())
+        context.state.pageLoader = false
       }).catch(err => {
         console.log(err)
+        context.state.pageLoader = true
       })
     },
     fetchVersion(context){
       Axios.get('https://v-svg-icons-server.herokuapp.com/version/').then(res => {
         context.commit('initVersion', res.data[0])
+        context.state.pageLoader = false
       }).catch(err => {
         console.log(err)
+        context.state.pageLoader = true
       })
     }
   },
