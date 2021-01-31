@@ -50,7 +50,7 @@ After this step, it can be used by all registered components in your project by 
   The default width and height values for all icons are 50px.
 
 ```vue
-<icon name="arrow-up" width="80px" height="80px" />
+<icon name="arrow-up" size="60px" />
 ```
 
 - You can use the "color" parameter to change the color of the icons.
