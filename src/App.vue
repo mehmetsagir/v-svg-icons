@@ -5,7 +5,7 @@
     </div>
     <Header @resetSearch="reset = $event" />
     <Search @searchText="searchText = $event" :reset="reset" />
-    <icon-list :searchText="searchText" />
+    <icon-list :searchText="searchText" v-if="this.$store.state.iconList.length > 0" />
     <icon name="chevron-circle-up" class="backToTop" width="35px" height="35px" color="rgba(0, 0, 0, .6)" @click.native="backToTop()" />
   </div>
 </template>
@@ -19,7 +19,7 @@ export default {
   data() {
     return {
       searchText: "",
-      reset: null,
+      reset: null
     };
   },
   components: { iconList, Search, Header },

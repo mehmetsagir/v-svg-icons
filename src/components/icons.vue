@@ -1,18 +1,15 @@
 <template>
   <div class="container">
-    <div class="alert" v-if="filteredList.length == 0">
+    <div class="alert" v-if="iconList.length == 0">
       No results found for <b>{{ searchText }}</b>!
     </div>
-    <div class="icon-box" v-for="(icon, index) in filteredList" :key="index">
-      <div
-        class="icon"
-        v-if="icon.title.toLowerCase().includes(searchText.trim().toLowerCase())"
-        @click="copy(icon)"
-      >
+    <div class="icon-box" v-for="(icon, index) in iconList" :key="index">
+      <div class="icon" @click="copy(icon)">
         <icon :name="icon.title" width="35px" height="35px" color="#495057" />
         <span>{{ icon.title }}</span>
       </div>
     </div>
+    <span id="load-more-btn" style="visibility: hidden"></span>
   </div>
 </template>
 
@@ -21,6 +18,13 @@ import Axios from "axios";
 
 export default {
   name: "iconList",
+  data(){
+    return{
+      iconList: [],
+      allIconList: this.$store.getters.getIcons,
+      iconListCount: 102
+    }
+  },
   props: ["searchText"],
   methods: {
     copy(icon) {
@@ -47,16 +51,49 @@ export default {
       textarea.select();
       document.execCommand("copy");
       textarea.parentNode.removeChild(textarea);
+    },
+    filteredListCount() {
+      if (this.searchText.length < 1) {
+        this.iconList = [];
+        this.allIconList.forEach((icon, index) => {
+          index < this.iconListCount ? this.iconList.push(icon) : false;
+        })
+      } else {
+        let index = 0;
+        this.iconList = [];
+        this.allIconList.filter(icon => {
+          if(icon.title.toLowerCase().includes(this.searchText.trim().toLowerCase()) || icon.title.toLowerCase().replace(/-/g, ' ').includes(this.searchText.trim().toLowerCase())){
+            index < this.iconListCount ? this.iconList.push(icon) : false;
+            index++;
+          }
+        });
+      }
     }
   },
-  computed: {
-    filteredList() {
-      return this.$store.state.iconList.filter(icon => {
-        return icon.title
-          .toLowerCase()
-          .includes(this.searchText.trim().toLowerCase());
-      });
+  watch: {
+    searchText() {
+      this.iconListCount = 102;
+      this.filteredListCount();
+    },
+    iconListCount() {
+      this.filteredListCount();
     }
+  },
+  mounted() {
+    const target = document.getElementById('load-more-btn');
+    const callback = (entries) => {
+      if(entries[0].isIntersecting){
+        loadMore()
+      }
+    }
+    const loadMore = () => {
+      this.iconListCount += 120;
+    }
+    const observer = new IntersectionObserver(callback);
+    observer.observe(target)
+  },
+  created() {
+    this.filteredListCount()
   }
 };
 </script>
@@ -68,6 +105,12 @@ export default {
   left: 0;
   padding: 5px 15px;
   background: green;
+}
+.no-more{
+  display: block !important ;
+  width: 100%;
+  margin-top: 15px;
+  font-size: 23px;
 }
 .container {
   padding: 40px 0;
