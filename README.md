@@ -17,7 +17,7 @@ These instructions will get you a copy of the component up and running on your l
 
 You can install v-svg-icons component by npm
 
-```
+```shell
 npm i v-svg-icons
 ```
 
