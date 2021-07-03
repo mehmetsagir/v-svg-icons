@@ -1,3 +1,23 @@
+<script>
+export default {
+  name: 'Search',
+  data() {
+    return {
+      searchText: ''
+    }
+  },
+  props: ['reset'],
+  watch: {
+    searchText() {
+      this.$emit('searchText', this.searchText)
+    },
+    reset() {
+      this.searchText = ''
+    }
+  }
+}
+</script>
+
 <template>
   <div class="container">
     <div class="search">
@@ -15,26 +35,6 @@
     </div>
   </div>
 </template>
-
-<script>
-export default {
-  name: "Search",
-  data() {
-    return {
-      searchText: ""
-    };
-  },
-  props: ["reset"],
-  watch: {
-    searchText() {
-      this.$emit("searchText", this.searchText);
-    },
-    reset(){
-      this.searchText = "";
-    }
-  }
-};
-</script>
 
 <style lang="scss" scoped>
 .container {

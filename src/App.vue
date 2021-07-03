@@ -1,26 +1,14 @@
-<template>
-  <div id="app">
-    <div class="loader-container" v-if="this.$store.state.pageLoader">
-      <div class="loader"></div>
-    </div>
-    <Header @resetSearch="reset = $event" />
-    <Search @searchText="searchText = $event" :reset="reset" />
-    <icon-list :searchText="searchText" v-if="this.$store.state.iconList.length > 0" />
-    <icon name="chevron-circle-up" class="backToTop" width="35px" height="35px" color="rgba(0, 0, 0, .6)" @click.native="backToTop()" />
-  </div>
-</template>
-
 <script>
-import Header from "@/components/Header";
-import Search from "@/components/Search";
-import iconList from "@/components/icons";
+import Header from '@/components/Header'
+import Search from '@/components/Search'
+import iconList from '@/components/icons'
 export default {
-  name: "App",
+  name: 'App',
   data() {
     return {
-      searchText: "",
+      searchText: '',
       reset: null
-    };
+    }
   },
   components: { iconList, Search, Header },
   created() {
@@ -28,28 +16,51 @@ export default {
     this.$store.dispatch('fetchVersion')
   },
   methods: {
-    backToTop(){
-      document.documentElement.scrollTop = 0;
+    backToTop() {
+      document.documentElement.scrollTop = 0
     }
-  },
-};
-
+  }
+}
 
 window.addEventListener('scroll', () => {
-  const backToTopBtn = document.querySelector('.backToTop');
-  document.documentElement.scrollTop > 310 ? backToTopBtn.style.display = 'block' : backToTopBtn.style.display = 'none'
+  const backToTopBtn = document.querySelector('.backToTop')
+  document.documentElement.scrollTop > 310
+    ? (backToTopBtn.style.display = 'block')
+    : (backToTopBtn.style.display = 'none')
 })
 </script>
 
+<template>
+  <div id="app">
+    <div class="loader-container" v-if="this.$store.state.pageLoader">
+      <div class="loader"></div>
+    </div>
+    <Header @resetSearch="reset = $event" />
+    <Search @searchText="searchText = $event" :reset="reset" />
+    <icon-list
+      :searchText="searchText"
+      v-if="this.$store.state.iconList.length > 0"
+    />
+    <icon
+      name="chevron-circle-up"
+      class="backToTop"
+      width="35px"
+      height="35px"
+      color="rgba(0, 0, 0, .6)"
+      @click.native="backToTop()"
+    />
+  </div>
+</template>
+
 <style lang="scss">
-@import url("https://fonts.googleapis.com/css2?family=Baloo+Tamma+2:wght@400;500;700&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Baloo+Tamma+2:wght@400;500;700&display=swap');
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Baloo Tamma 2", cursive, sans-serif;
+  font-family: 'Baloo Tamma 2', cursive, sans-serif;
 }
-html{
+html {
   scroll-behavior: smooth;
 }
 a {
@@ -60,14 +71,14 @@ a {
   width: 1200px;
   margin: 0 auto;
 }
-.backToTop{
+.backToTop {
   position: fixed;
   right: 20px;
   bottom: 20px;
   cursor: pointer;
   z-index: 99;
   display: none;
-  &::selection{
+  &::selection {
     background: none;
   }
 }
@@ -78,16 +89,16 @@ a {
   }
 }
 
-.loader-container{
+.loader-container {
   width: 100%;
   height: 100vh;
   position: fixed;
-  background: #1D1F20;
+  background: #1d1f20;
   display: grid;
   place-items: center;
   z-index: 999;
 }
-.loader  {
+.loader {
   animation: rotate 1s infinite;
   height: 50px;
   width: 50px;
@@ -132,7 +143,7 @@ a {
   50% {
     box-shadow: 0 0 0 #f8b334;
     margin-bottom: 0;
-    -webkit-transform: translate(15px,15px);
+    -webkit-transform: translate(15px, 15px);
     -moz-transform: translate(15px, 15px);
   }
   100% {
@@ -147,7 +158,7 @@ a {
   50% {
     box-shadow: 0 0 0 #97bf0d;
     margin-top: -20px;
-    -webkit-transform: translate(15px,15px);
+    -webkit-transform: translate(15px, 15px);
     -moz-transform: translate(15px, 15px);
   }
   100% {
