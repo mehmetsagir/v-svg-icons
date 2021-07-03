@@ -1,7 +1,104 @@
+<script>
+import Axios from 'axios'
+
+export default {
+  name: 'iconList',
+  data() {
+    return {
+      iconList: [],
+      allIconList: this.$store.getters.getIcons,
+      iconListCount: 102
+    }
+  },
+  props: ['searchText'],
+  methods: {
+    copy(icon) {
+      Axios.put(
+        'https://v-svg-icons-server.herokuapp.com/updateView/' + icon._id,
+        {
+          viewsCount: icon.viewsCount + 1
+        }
+      ).catch((err) => {
+        console.log(err)
+      })
+
+      document.querySelectorAll('.icon-box .icon').forEach((item) => {
+        item.classList.remove('active')
+        if (item.lastChild.innerText == icon.title) {
+          item.lastChild.innerHTML = 'Copied!'
+          item.classList.add('active')
+          setTimeout(() => {
+            item.classList.remove('active')
+            item.lastChild.innerText = icon.title
+          }, 500)
+        }
+      })
+      let textarea = document.createElement('textarea')
+      textarea.value = icon.title
+      document.body.appendChild(textarea)
+      textarea.select()
+      document.execCommand('copy')
+      textarea.parentNode.removeChild(textarea)
+    },
+    filteredListCount() {
+      if (this.searchText.length < 1) {
+        this.iconList = []
+        this.allIconList.forEach((icon, index) => {
+          index < this.iconListCount ? this.iconList.push(icon) : false
+        })
+      } else {
+        let index = 0
+        this.iconList = []
+        this.allIconList.filter((icon) => {
+          if (
+            icon.title
+              .toLowerCase()
+              .includes(this.searchText.trim().toLowerCase()) ||
+            icon.title
+              .toLowerCase()
+              .replace(/-/g, ' ')
+              .includes(this.searchText.trim().toLowerCase())
+          ) {
+            index < this.iconListCount ? this.iconList.push(icon) : false
+            index++
+          }
+        })
+      }
+    }
+  },
+  watch: {
+    searchText() {
+      this.iconListCount = 102
+      this.filteredListCount()
+    },
+    iconListCount() {
+      this.filteredListCount()
+    }
+  },
+  mounted() {
+    const target = document.getElementById('load-more-btn')
+    const callback = (entries) => {
+      if (entries[0].isIntersecting) {
+        loadMore()
+      }
+    }
+    const loadMore = () => {
+      this.iconListCount += 120
+    }
+    const observer = new IntersectionObserver(callback)
+    observer.observe(target)
+  },
+  created() {
+    this.filteredListCount()
+  }
+}
+</script>
+
 <template>
   <div class="container">
     <div class="alert" v-if="iconList.length == 0">
-      No results found for <b>{{ searchText }}</b>!
+      No results found for <b>{{ searchText }}</b
+      >!
     </div>
     <div class="icon-box" v-for="(icon, index) in iconList" :key="index">
       <div class="icon" @click="copy(icon)">
@@ -13,91 +110,6 @@
   </div>
 </template>
 
-<script>
-import Axios from "axios";
-
-export default {
-  name: "iconList",
-  data(){
-    return{
-      iconList: [],
-      allIconList: this.$store.getters.getIcons,
-      iconListCount: 102
-    }
-  },
-  props: ["searchText"],
-  methods: {
-    copy(icon) {
-      Axios.put('https://v-svg-icons-server.herokuapp.com/updateView/' + icon._id, {
-        viewsCount: icon.viewsCount + 1
-      }).catch(err => {
-        console.log(err)
-      })
-
-      document.querySelectorAll(".icon-box .icon").forEach(item => {
-        item.classList.remove("active");
-        if (item.lastChild.innerText == icon.title) {
-          item.lastChild.innerHTML = "Copied!";
-          item.classList.add("active");
-          setTimeout(() => {
-            item.classList.remove("active");
-            item.lastChild.innerText = icon.title;
-          }, 500);
-        }
-      });
-      let textarea = document.createElement("textarea");
-      textarea.value = icon.title;
-      document.body.appendChild(textarea);
-      textarea.select();
-      document.execCommand("copy");
-      textarea.parentNode.removeChild(textarea);
-    },
-    filteredListCount() {
-      if (this.searchText.length < 1) {
-        this.iconList = [];
-        this.allIconList.forEach((icon, index) => {
-          index < this.iconListCount ? this.iconList.push(icon) : false;
-        })
-      } else {
-        let index = 0;
-        this.iconList = [];
-        this.allIconList.filter(icon => {
-          if(icon.title.toLowerCase().includes(this.searchText.trim().toLowerCase()) || icon.title.toLowerCase().replace(/-/g, ' ').includes(this.searchText.trim().toLowerCase())){
-            index < this.iconListCount ? this.iconList.push(icon) : false;
-            index++;
-          }
-        });
-      }
-    }
-  },
-  watch: {
-    searchText() {
-      this.iconListCount = 102;
-      this.filteredListCount();
-    },
-    iconListCount() {
-      this.filteredListCount();
-    }
-  },
-  mounted() {
-    const target = document.getElementById('load-more-btn');
-    const callback = (entries) => {
-      if(entries[0].isIntersecting){
-        loadMore()
-      }
-    }
-    const loadMore = () => {
-      this.iconListCount += 120;
-    }
-    const observer = new IntersectionObserver(callback);
-    observer.observe(target)
-  },
-  created() {
-    this.filteredListCount()
-  }
-};
-</script>
-
 <style lang="scss">
 .copy-alert {
   position: absolute;
@@ -106,7 +118,7 @@ export default {
   padding: 5px 15px;
   background: green;
 }
-.no-more{
+.no-more {
   display: block !important ;
   width: 100%;
   margin-top: 15px;
@@ -159,9 +171,9 @@ export default {
       span {
         margin-top: 15px;
         font-size: 14px;
-        font-family: sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI",
-          Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji",
-          "Segoe UI Symbol";
+        font-family: sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI',
+          Roboto, Helvetica, Arial, 'Apple Color Emoji', 'Segoe UI Emoji',
+          'Segoe UI Symbol';
         color: rgba(0, 0, 0, 0.4);
       }
     }

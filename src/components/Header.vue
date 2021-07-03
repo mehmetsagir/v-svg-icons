@@ -1,10 +1,29 @@
+<script>
+export default {
+  name: 'Header',
+  data() {
+    return {
+      reset: true
+    }
+  },
+  methods: {
+    resetSearchText() {
+      this.reset = !this.reset
+      this.$emit('resetSearch', this.reset)
+    }
+  }
+}
+</script>
+
 <template>
   <div class="header">
     <div class="container">
       <div class="logo">
         <h1 @click="resetSearchText">
           Vue Svg Icons
-          <a href="https://npmjs.com/v-svg-icons" target="_blank">{{ this.$store.state.version.version }}</a>
+          <a href="https://npmjs.com/v-svg-icons" target="_blank">{{
+            this.$store.state.version.version
+          }}</a>
         </h1>
       </div>
       <a
@@ -18,23 +37,6 @@
     </div>
   </div>
 </template>
-
-<script>
-export default {
-  name: "Header",
-  data(){
-    return{
-      reset: true
-    }
-  },
-  methods: {
-    resetSearchText(){
-      this.reset = !this.reset;
-      this.$emit('resetSearch', this.reset)
-    }
-  }
-};
-</script>
 
 <style lang="scss" scoped>
 .header {
