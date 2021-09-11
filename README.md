@@ -4,10 +4,10 @@ Svg icons for VueJS. <br>
 [Türkçe README dosyası için tıklayın!](https://github.com/mehmetsagir/v-svg-icons/blob/master/trREADME.md)
 
 <p>
-  <a href="https://www.npmjs.com/package/v-svg-icons" target="_blank"><img src="https://img.shields.io/npm/dt/v-svg-icons.svg" alt="Downloads"></a>
-  <a href="https://www.npmjs.com/package/v-svg-icons" target="_blank"><img src="https://img.shields.io/npm/dm/v-svg-icons.svg?sanitize=true" alt="Downloads"></a>
-  <a href="https://www.npmjs.com/package/v-svg-icons" target="_blank"><img src="https://img.shields.io/npm/v/v-svg-icons.svg?sanitize=true" alt="Version"></a>
-  <a href="https://www.npmjs.com/package/v-svg-icons" target="_blank"><img src="https://img.shields.io/npm/l/v-svg-icons.svg?sanitize=true" alt="License"></a>
+  <a href="https://www.npmjs.com/package/v-svg-icons"><img src="https://img.shields.io/npm/dt/v-svg-icons.svg" alt="Downloads"></a>
+  <a href="https://www.npmjs.com/package/v-svg-icons"><img src="https://img.shields.io/npm/dm/v-svg-icons.svg?sanitize=true" alt="Downloads"></a>
+  <a href="https://www.npmjs.com/package/v-svg-icons"><img src="https://img.shields.io/npm/v/v-svg-icons.svg?sanitize=true" alt="Version"></a>
+  <a href="https://www.npmjs.com/package/v-svg-icons"><img src="https://img.shields.io/npm/l/v-svg-icons.svg?sanitize=true" alt="License"></a>
 </p>
 
 ## Getting Started
