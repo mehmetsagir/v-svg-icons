@@ -8,5 +8,5 @@ Vue.component('icon', icons)
 
 new Vue({
   store,
-  render: h => h(App)
+  render: (h) => h(App)
 }).$mount('#app')

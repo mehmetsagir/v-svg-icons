@@ -25,20 +25,20 @@ export default new Vuex.Store({
   actions: {
     async fetchIcons(context) {
       await Axios.get(context.state.baseURL)
-        .then(res => {
+        .then((res) => {
           context.commit('initIconList', res.data.reverse())
         })
-        .catch(err => {
+        .catch((err) => {
           console.log(err)
           context.state.pageLoader = true
         })
     },
     fetchVersion(context) {
       Axios.get(context.state.baseURL + '/version/')
-        .then(res => {
+        .then((res) => {
           context.commit('initVersion', res.data[0])
         })
-        .catch(err => {
+        .catch((err) => {
           console.log(err)
           context.state.pageLoader = true
         })
