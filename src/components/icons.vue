@@ -1,28 +1,17 @@
 <script>
-import Axios from 'axios'
-
 export default {
   name: 'iconList',
   data() {
     return {
       iconList: [],
-      allIconList: this.$store.getters.getIcons,
+      allIconList: this.$store.state.iconList,
       iconListCount: 102
     }
   },
   props: ['searchText'],
   methods: {
     copy(icon) {
-      Axios.put(
-        'https://v-svg-icons-server.herokuapp.com/updateView/' + icon._id,
-        {
-          viewsCount: icon.viewsCount + 1
-        }
-      ).catch((err) => {
-        console.log(err)
-      })
-
-      document.querySelectorAll('.icon-box .icon').forEach((item) => {
+      document.querySelectorAll('.icon-box .icon').forEach(item => {
         item.classList.remove('active')
         if (item.lastChild.innerText == icon.title) {
           item.lastChild.innerHTML = 'Copied!'
@@ -49,7 +38,7 @@ export default {
       } else {
         let index = 0
         this.iconList = []
-        this.allIconList.filter((icon) => {
+        this.allIconList.filter(icon => {
           if (
             icon.title
               .toLowerCase()
@@ -77,7 +66,7 @@ export default {
   },
   mounted() {
     const target = document.getElementById('load-more-btn')
-    const callback = (entries) => {
+    const callback = entries => {
       if (entries[0].isIntersecting) {
         loadMore()
       }
@@ -100,7 +89,7 @@ export default {
       No results found for <b>{{ searchText }}</b
       >!
     </div>
-    <div class="icon-box" v-for="(icon, index) in iconList" :key="index">
+    <div class="icon-box" v-else v-for="(icon, index) in iconList" :key="index">
       <div class="icon" @click="copy(icon)">
         <icon :name="icon.title" width="35px" height="35px" color="#495057" />
         <span>{{ icon.title }}</span>
