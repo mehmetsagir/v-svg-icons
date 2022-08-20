@@ -17,6 +17,7 @@ export default new Vuex.Store({
     initIconList(state, iconList) {
       state.iconList = iconList
       state.iconIsLoad = true
+      state.pageLoader = false
     },
     initVersion(state, version) {
       state.version = version
@@ -24,35 +25,17 @@ export default new Vuex.Store({
   },
   actions: {
     async fetchIcons(context) {
-      await Axios.get(context.state.baseURL)
-        .then((res) => {
-          context.commit('initIconList', res.data.reverse())
-        })
-        .catch((err) => {
-          console.log(err)
-          context.state.pageLoader = true
-        })
+      const response = await Axios.get(context.state.baseURL)
+      context.commit('initIconList', response.data.reverse())
     },
-    fetchVersion(context) {
-      Axios.get(context.state.baseURL + '/version/')
-        .then((res) => {
-          context.commit('initVersion', res.data[0])
-        })
-        .catch((err) => {
-          console.log(err)
-          context.state.pageLoader = true
-        })
+    async fetchVersion(context) {
+      const response = await Axios.get(context.state.baseURL + '/version/')
+      context.commit('initVersion', response.data[0])
     }
   },
   getters: {
     countIcons(state) {
       return state.iconList.length
-    },
-    getIcons(state) {
-      if (state.iconList.length > 0) {
-        state.pageLoader = false
-        return state.iconList
-      }
     }
   }
 })
