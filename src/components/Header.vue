@@ -18,12 +18,15 @@ export default {
 <template>
   <div class="header">
     <div class="container">
-      <div class="logo">
-        <h1 @click="resetSearchText">
-          Vue Svg Icons
-          <a href="https://npmjs.com/v-svg-icons" target="_blank">v1.2.0</a>
-        </h1>
-      </div>
+      <h1 @click="resetSearchText">
+        Vue Svg Icons
+        <a href="https://npmjs.com/v-svg-icons" target="_blank">
+          <img
+            src="https://img.shields.io/npm/v/v-svg-icons.svg?sanitize=true"
+            alt="Version"
+          />
+        </a>
+      </h1>
       <a
         href="https://github.com/mehmetsagir/v-svg-icons#readme"
         target="_blank"
@@ -48,7 +51,7 @@ export default {
       font-size: 18px;
       display: flex;
       align-items: center;
-      height: 40px;
+
       svg {
         margin-right: 5px;
         margin-bottom: 5px;
@@ -56,13 +59,12 @@ export default {
     }
     h1 {
       font-size: 30px;
+      line-height: 30px;
       font-weight: 500;
       cursor: pointer;
-      a {
-        display: inline-block;
-        font-size: 15px;
-        font-weight: 400;
-      }
+      display: flex;
+      gap: 12px;
+
       &::selection,
       span::selection {
         background: none;
