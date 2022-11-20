@@ -21,9 +21,7 @@ export default {
       <div class="logo">
         <h1 @click="resetSearchText">
           Vue Svg Icons
-          <a href="https://npmjs.com/v-svg-icons" target="_blank">{{
-            this.$store.state.version.version
-          }}</a>
+          <a href="https://npmjs.com/v-svg-icons" target="_blank">v1.2.0</a>
         </h1>
       </div>
       <a
