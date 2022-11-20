@@ -1,9 +1,11 @@
 <script>
+import allIcons from 'v-svg-icons/icons.json'
 export default {
   name: 'Search',
   data() {
     return {
-      searchText: ''
+      searchText: '',
+      iconsLength: allIcons?.length
     }
   },
   props: ['reset'],
@@ -29,9 +31,7 @@ export default {
         required
         v-model="searchText"
       />
-      <label for="search"
-        >Search within {{ this.$store.state.iconList.length }} icons</label
-      >
+      <label for="search">Search within {{ this.iconsLength }} icons</label>
     </div>
   </div>
 </template>
