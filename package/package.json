@@ -1,0 +1,16 @@
+{
+  "name": "v-svg-icons",
+  "version": "1.2.0",
+  "description": "Svg icons for vue.js",
+  "main": "icons.vue",
+  "author": "Mehmet Sağır",
+  "license": "MIT",
+  "keywords": [
+    "vuejs",
+    "svg",
+    "icon",
+    "v-svg-icons"
+  ],
+  "repository": "https://github.com/mehmetsagir/v-svg-icons",
+  "homepage": "https://mehmetsagir.github.io/v-svg-icons/"
+}
