@@ -77,7 +77,7 @@ Bu adımdan sonra projenizdeki tüm kayıtlı bileşenler tarafından belirlemi�
 </style>
 ```
 
-Svg için uygulanabilecek tüm stillendirme işlemlerini örnekte ki gibi uygulayabilirsiniz.
+Svg için uygulanabilecek tüm stillendirme işlemlerini örnekteki gibi uygulayabilirsiniz.
 
 ## Versiyon
 
