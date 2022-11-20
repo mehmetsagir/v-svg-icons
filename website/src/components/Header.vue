@@ -1,18 +1,18 @@
 <script>
 export default {
-  name: 'Header',
+  name: "HeaderComponent",
   data() {
     return {
-      reset: true
-    }
+      reset: true,
+    };
   },
   methods: {
     resetSearchText() {
-      this.reset = !this.reset
-      this.$emit('resetSearch', this.reset)
-    }
-  }
-}
+      this.reset = !this.reset;
+      this.$emit("resetSearch", this.reset);
+    },
+  },
+};
 </script>
 
 <template>
@@ -32,7 +32,7 @@ export default {
         target="_blank"
         ref="non"
       >
-        <icon name="book" width="20px" height="20px" color="#219187" />
+        <v-icon name="book" width="20px" height="20px" color="#219187" />
         Documentation
       </a>
     </div>

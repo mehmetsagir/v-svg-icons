@@ -1,87 +1,87 @@
 <script>
-import allIcons from 'v-svg-icons/icons.json'
+import allIcons from "v-svg-icons/icons.json";
 export default {
-  name: 'iconList',
+  name: "iconList",
   data() {
     return {
       iconList: [],
       allIconList: allIcons,
-      iconListCount: 102
-    }
+      iconListCount: 102,
+    };
   },
-  props: ['searchText'],
+  props: ["searchText"],
   methods: {
     copy(iconName) {
-      document.querySelectorAll('.icon-box .icon').forEach(item => {
-        item.classList.remove('active')
+      document.querySelectorAll(".icon-box .icon").forEach((item) => {
+        item.classList.remove("active");
         if (item.lastChild.innerText == iconName) {
-          item.lastChild.innerHTML = 'Copied!'
-          item.classList.add('active')
+          item.lastChild.innerHTML = "Copied!";
+          item.classList.add("active");
           setTimeout(() => {
-            item.classList.remove('active')
-            item.lastChild.innerText = iconName
-          }, 500)
+            item.classList.remove("active");
+            item.lastChild.innerText = iconName;
+          }, 500);
         }
-      })
-      let textarea = document.createElement('textarea')
-      textarea.value = iconName
-      document.body.appendChild(textarea)
-      textarea.select()
-      document.execCommand('copy')
-      textarea.parentNode.removeChild(textarea)
+      });
+      let textarea = document.createElement("textarea");
+      textarea.value = iconName;
+      document.body.appendChild(textarea);
+      textarea.select();
+      document.execCommand("copy");
+      textarea.parentNode.removeChild(textarea);
     },
     filteredListCount() {
       if (this.searchText.length < 1) {
-        this.iconList = []
+        this.iconList = [];
         this.allIconList.forEach((icon, index) => {
-          index < this.iconListCount ? this.iconList.push(icon) : false
-        })
+          index < this.iconListCount ? this.iconList.push(icon) : false;
+        });
       } else {
-        let index = 0
-        this.iconList = []
-        this.allIconList.filter(icon => {
+        let index = 0;
+        this.iconList = [];
+        this.allIconList.filter((icon) => {
           if (
             icon.name
               .toLowerCase()
               .includes(this.searchText.trim().toLowerCase()) ||
             icon.name
               .toLowerCase()
-              .replace(/-/g, ' ')
+              .replace(/-/g, " ")
               .includes(this.searchText.trim().toLowerCase())
           ) {
-            index < this.iconListCount ? this.iconList.push(icon) : false
-            index++
+            index < this.iconListCount ? this.iconList.push(icon) : false;
+            index++;
           }
-        })
+        });
       }
-    }
+    },
   },
   watch: {
     searchText() {
-      this.iconListCount = 102
-      this.filteredListCount()
+      this.iconListCount = 102;
+      this.filteredListCount();
     },
     iconListCount() {
-      this.filteredListCount()
-    }
+      this.filteredListCount();
+    },
   },
   mounted() {
-    const target = document.getElementById('load-more-btn')
-    const callback = entries => {
+    const target = document.getElementById("load-more-btn");
+    const callback = (entries) => {
       if (entries[0].isIntersecting) {
-        loadMore()
+        loadMore();
       }
-    }
+    };
     const loadMore = () => {
-      this.iconListCount += 120
-    }
-    const observer = new IntersectionObserver(callback)
-    observer.observe(target)
+      this.iconListCount += 120;
+    };
+    const observer = new IntersectionObserver(callback);
+    observer.observe(target);
   },
   created() {
-    this.filteredListCount()
-  }
-}
+    this.filteredListCount();
+  },
+};
 </script>
 
 <template>
@@ -92,7 +92,7 @@ export default {
     </div>
     <div class="icon-box" v-else v-for="(icon, index) in iconList" :key="index">
       <div class="icon" @click="copy(icon.name)">
-        <icon :name="icon.name" width="35px" height="35px" color="#495057" />
+        <v-icon :name="icon.name" width="35px" height="35px" color="#495057" />
         <span>{{ icon.name }}</span>
       </div>
     </div>
@@ -161,9 +161,9 @@ export default {
       span {
         margin-top: 15px;
         font-size: 14px;
-        font-family: sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI',
-          Roboto, Helvetica, Arial, 'Apple Color Emoji', 'Segoe UI Emoji',
-          'Segoe UI Symbol';
+        font-family: sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI",
+          Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji",
+          "Segoe UI Symbol";
         color: rgba(0, 0, 0, 0.4);
       }
     }

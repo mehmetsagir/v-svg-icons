@@ -1,23 +1,23 @@
 <script>
-import allIcons from 'v-svg-icons/icons.json'
+import allIcons from "v-svg-icons/icons.json";
 export default {
-  name: 'Search',
+  name: "SearchComponent",
   data() {
     return {
-      searchText: '',
-      iconsLength: allIcons?.length
-    }
+      searchText: "",
+      iconsLength: allIcons?.length,
+    };
   },
-  props: ['reset'],
+  props: ["reset"],
   watch: {
     searchText() {
-      this.$emit('searchText', this.searchText)
+      this.$emit("searchText", this.searchText);
     },
     reset() {
-      this.searchText = ''
-    }
-  }
-}
+      this.searchText = "";
+    },
+  },
+};
 </script>
 
 <template>

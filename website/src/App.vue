@@ -1,44 +1,37 @@
 <script>
-import Header from '@/components/Header'
-import Search from '@/components/Search'
-import iconList from '@/components/icons'
+import Header from "@/components/Header";
+import Search from "@/components/Search";
+import iconList from "@/components/icons";
 export default {
-  name: 'App',
+  name: "App",
   data() {
     return {
-      searchText: '',
-      reset: null
-    }
+      searchText: "",
+      reset: null,
+    };
   },
   components: { iconList, Search, Header },
-  created() {
-    this.$store.dispatch('fetchIcons')
-    this.$store.dispatch('fetchVersion')
-  },
   methods: {
     backToTop() {
-      document.documentElement.scrollTop = 0
-    }
-  }
-}
+      document.documentElement.scrollTop = 0;
+    },
+  },
+};
 
-window.addEventListener('scroll', () => {
-  const backToTopBtn = document.querySelector('.backToTop')
+window.addEventListener("scroll", () => {
+  const backToTopBtn = document.querySelector(".backToTop");
   document.documentElement.scrollTop > 310
-    ? (backToTopBtn.style.display = 'block')
-    : (backToTopBtn.style.display = 'none')
-})
+    ? (backToTopBtn.style.display = "block")
+    : (backToTopBtn.style.display = "none");
+});
 </script>
 
 <template>
   <div id="app">
     <Header @resetSearch="reset = $event" />
     <Search @searchText="searchText = $event" :reset="reset" />
-    <icon-list
-      :searchText="searchText"
-      v-if="this.$store.state.iconList.length > 0"
-    />
-    <icon
+    <icon-list :searchText="searchText" />
+    <v-icon
       name="angle-up"
       class="backToTop"
       width="35px"
@@ -50,12 +43,12 @@ window.addEventListener('scroll', () => {
 </template>
 
 <style lang="scss">
-@import url('https://fonts.googleapis.com/css2?family=Baloo+Tamma+2:wght@400;500;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Baloo+Tamma+2:wght@400;500;700&display=swap");
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Baloo Tamma 2', cursive, sans-serif;
+  font-family: "Baloo Tamma 2", cursive, sans-serif;
 }
 html {
   scroll-behavior: smooth;
@@ -103,7 +96,7 @@ a {
 .loader:before,
 .loader:after {
   border-radius: 50%;
-  content: '';
+  content: "";
   display: block;
   height: 20px;
   width: 20px;
