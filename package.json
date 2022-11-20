@@ -1,7 +1,0 @@
-{
-  "name": "v-svg-icons",
-  "scripts": {
-    "build": "cd website && npm run build",
-    "publish": "cd package && npm publish"
-  }
-}
