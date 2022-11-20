@@ -32,9 +32,6 @@ window.addEventListener('scroll', () => {
 
 <template>
   <div id="app">
-    <div class="loader-container" v-if="this.$store.state.pageLoader">
-      <div class="loader"></div>
-    </div>
     <Header @resetSearch="reset = $event" />
     <Search @searchText="searchText = $event" :reset="reset" />
     <icon-list
@@ -42,7 +39,7 @@ window.addEventListener('scroll', () => {
       v-if="this.$store.state.iconList.length > 0"
     />
     <icon
-      name="chevron-circle-up"
+      name="angle-up"
       class="backToTop"
       width="35px"
       height="35px"
