@@ -1,29 +1,30 @@
 <script>
+import allIcons from 'v-svg-icons/icons.json'
 export default {
   name: 'iconList',
   data() {
     return {
       iconList: [],
-      allIconList: this.$store.state.iconList,
+      allIconList: allIcons,
       iconListCount: 102
     }
   },
   props: ['searchText'],
   methods: {
-    copy(icon) {
+    copy(iconName) {
       document.querySelectorAll('.icon-box .icon').forEach(item => {
         item.classList.remove('active')
-        if (item.lastChild.innerText == icon.title) {
+        if (item.lastChild.innerText == iconName) {
           item.lastChild.innerHTML = 'Copied!'
           item.classList.add('active')
           setTimeout(() => {
             item.classList.remove('active')
-            item.lastChild.innerText = icon.title
+            item.lastChild.innerText = iconName
           }, 500)
         }
       })
       let textarea = document.createElement('textarea')
-      textarea.value = icon.title
+      textarea.value = iconName
       document.body.appendChild(textarea)
       textarea.select()
       document.execCommand('copy')
@@ -40,10 +41,10 @@ export default {
         this.iconList = []
         this.allIconList.filter(icon => {
           if (
-            icon.title
+            icon.name
               .toLowerCase()
               .includes(this.searchText.trim().toLowerCase()) ||
-            icon.title
+            icon.name
               .toLowerCase()
               .replace(/-/g, ' ')
               .includes(this.searchText.trim().toLowerCase())
@@ -90,9 +91,9 @@ export default {
       >!
     </div>
     <div class="icon-box" v-else v-for="(icon, index) in iconList" :key="index">
-      <div class="icon" @click="copy(icon)">
-        <icon :name="icon.title" width="35px" height="35px" color="#495057" />
-        <span>{{ icon.title }}</span>
+      <div class="icon" @click="copy(icon.name)">
+        <icon :name="icon.name" width="35px" height="35px" color="#495057" />
+        <span>{{ icon.name }}</span>
       </div>
     </div>
     <span id="load-more-btn" style="visibility: hidden"></span>
